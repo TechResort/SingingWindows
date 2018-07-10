@@ -36,7 +36,7 @@ print('Welcome to the Twitter colour bot!')
 try:
 
     api = twitter.Api(consumer_key='your_consumer_key_here',
-                  consumer_secret='your_consumer_secret_here,
+                  consumer_secret='your_consumer_secret_here',
                   access_token_key='your_access_token_key',
                   access_token_secret='your_access_token_secret')
 
