@@ -58,8 +58,10 @@ except:
 while True:
 
     # Searches for all terms featuring the hashtag in the string below. Change this to replace the search term to match
-
-    hash_searches = api.GetSearch(term="#dcsingingwindows",count=1) # Searches for the string featured and returns the data of most recent tweet
+    try:
+        hash_searches = api.GetSearch(term="#dcsingingwindows",count=1) # Searches for the string featured and returns the data of most recent tweet
+    except:
+        print('Error fetching search')
 
     time.sleep(6) # Waits 6 seconds - prevents reaching Twitter's API search rate limit
 
@@ -89,12 +91,13 @@ while True:
 
 
     print(tweet_txt) # Outputs the string to be sent
-
-
-    request = requests.post("https://api.particle.io/v1/devices/your_photon_id_here",data={'value': tweet_txt}) # Sends tweet through a POST request to a Photon which controls the display
     
-    print(request.status_code, request.reason) # Outputs the POST status and reason - full list of these can be found online
-
+    try:
+        request = requests.post("https://api.particle.io/v1/devices/your_photon_id_here",data={'value': tweet_txt}) # Sends tweet through a POST request to a Photon which controls the display
+    
+        print(request.status_code, request.reason) # Outputs the POST status and reason - full list of these can be found online
+    except:  
+        print('Error sending POST request. Check network status')
 
 # End code
 
