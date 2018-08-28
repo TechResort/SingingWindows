@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Singing Windows Twitter Bot
-ver="2.0"
+ver="2.1"
 # This code uses the Twitter for Python API (https://python-twitter.readthedocs.io/en/latest/) to search for tweets matching a certain hashtag, and sends them to a Photon
 # The Photon is an Internet of Things device that controls the Singing Windows light display by reading the text sent to it at the end of this code.
 
@@ -8,6 +8,8 @@ ver="2.0"
 #               Checks for excessive tweet length
 #               Tweets reply to initial tweeter
 #               Issues identified in GitHub Issue "Improvements 201808"
+#
+# Version 2:1:  Fixes Unicode Warning Issue upon script execution
 
 # Begin code
 
@@ -110,9 +112,9 @@ while True: # lovely infinite loop
         # remove hashtag and replace problem characters “, ” and \ 
         for c in range(0, len(tweet_txt)):
             if (c<hash_start or c>hash_stop):
-                if (tweet_txt[c] == '”' or tweet_txt[c] == '“'):
+                if (tweet_txt[c].encode('utf-8') == '”' or tweet_txt[c].encode('utf-8') == '“'):
                     tweet_txt_list += '"'
-                elif (tweet_txt[c] != "\\"):
+                elif (tweet_txt[c].encode('utf-8') != "\\"):
                     tweet_txt_list += tweet_txt[c]
 
         # The code above deals with "smart quotes" featured on iPhones - these are directional and the Photon does not detect these
